@@ -106,9 +106,12 @@ const SITE = {
     title: "Birlikte bir şey yapalım.",
     description: "Staj, freelance proje ya da sadece tanışmak için yazabilirsin.",
     email: "ornek@mail.com",          // TODO: kendi e-posta adresin
+    // Sosyal medya linkleri: hem giriş bölümünün sağındaki ikonlarda hem de buradaki iletişim bölümünde görünür.
+    // icon: "instagram", "linkedin" veya "github" olabilir.
     links: [
-      { text: "GitHub",   url: "https://github.com/Emirhan-Kar" },
-      { text: "LinkedIn", url: "https://linkedin.com/in/kullaniciadi" },   // TODO
+      { text: "Instagram", icon: "instagram", url: "https://www.instagram.com/eemirhankarr/" },
+      { text: "LinkedIn",  icon: "linkedin",  url: "https://www.linkedin.com/in/emirhankar1/" },
+      { text: "GitHub",    icon: "github",    url: "https://github.com/Emirhan-Kar" },
     ],
     footer: "© 2026 Emirhan Kar",
   },
@@ -152,6 +155,12 @@ nav .wrap{display:flex;justify-content:flex-end;align-items:center;height:68px}
 .btn.dark{background:var(--text);color:var(--bg)}
 .btn.dark:hover{background:var(--accent);border-color:var(--accent)}
 .btn:not(.dark):hover{background:var(--card)}
+.hero .wrap{display:grid;grid-template-columns:1fr auto;gap:40px}
+.hero-socials{display:flex;flex-direction:column;gap:12px;align-self:center;align-items:center}
+.hero-socials::before,.hero-socials::after{content:"";width:1px;height:36px;background:var(--line)}
+.icon-link{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:color .2s,border-color .2s,transform .2s}
+.icon-link:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+.icon-link svg,.socials svg{width:18px;height:18px}
  
 /* sections */
 section{padding:70px 0;border-top:1px solid var(--line)}
@@ -194,7 +203,7 @@ a.proj:hover .arrow{transform:translateX(4px)}
 .contact p{color:var(--muted);margin-bottom:28px}
 .email{font-family:var(--serif);font-size:clamp(22px,4vw,30px);color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
 .socials{display:flex;gap:24px;margin-top:30px}
-.socials a{text-decoration:none;color:var(--muted)}
+.socials a{text-decoration:none;color:var(--muted);display:inline-flex;align-items:center;gap:8px}
 .socials a:hover{color:var(--text)}
 footer{padding:40px 0 50px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
  
@@ -208,6 +217,9 @@ footer{padding:40px 0 50px;font-size:14px;color:var(--muted);border-top:1px soli
   .nav-links a:nth-child(3){display:none}
   .hero{padding:70px 0}
   .avatar{width:110px;height:110px;font-size:34px}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-socials{flex-direction:row;align-self:start}
+  .hero-socials::before,.hero-socials::after{display:none}
   .sec-grid{grid-template-columns:1fr;gap:20px}
   .feat{padding:24px}
   .skills{grid-template-columns:1fr}
@@ -233,10 +245,15 @@ Object.entries({bg:'background',card:'card',text:'text',muted:'muted',accent:'ac
  
 document.title = SITE.pageTitle;
  
+const ICONS = {
+  instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>',
+  linkedin:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>',
+  github:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>',
+};
 const ext = l => l ? `href="${l}" target="_blank" rel="noopener"` : '';
  
 $('#app').innerHTML = `
-<header class="hero"><div class="wrap">
+<header class="hero"><div class="wrap"><div>
   ${SITE.photo ? `<img class="avatar fade" src="${SITE.photo}" alt="Profil fotoğrafı">` : `<div class="avatar fade">${SITE.photoInitial}</div>`}
       <h1 class="fade">${H.greeting} <em>${H.name}</em></h1>
       <div class="role fade">${H.role}</div>
@@ -245,6 +262,8 @@ $('#app').innerHTML = `
         <a class="btn dark" href="${H.primaryButton.link}">${H.primaryButton.text}</a>
         <a class="btn" href="${H.secondaryButton.link}">${H.secondaryButton.text}</a>
       </div>
+  </div>
+  <div class="hero-socials fade">${C.links.map(l=>`<a class="icon-link" ${ext(l.url)} aria-label="${l.text}" title="${l.text}">${ICONS[l.icon]||''}</a>`).join('')}</div>
 </div></header>
  
 <section id="hakkimda"><div class="wrap sec-grid fade">
@@ -286,7 +305,7 @@ $('#app').innerHTML = `
   <h2>${C.title}</h2>
   <p>${C.description}</p>
   <a class="email" href="mailto:${C.email}">${C.email}</a>
-  <div class="socials">${C.links.map(l=>`<a ${ext(l.url)}>${l.text} ↗</a>`).join('')}</div>
+  <div class="socials">${C.links.map(l=>`<a ${ext(l.url)}>${ICONS[l.icon]||''}${l.text}</a>`).join('')}</div>
 </div></section>
  
 <footer><div class="wrap">${C.footer}</div></footer>`;
