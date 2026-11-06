@@ -45,10 +45,10 @@ const SITE = {
     title: "Hakkımda",
     paragraphs: [
       "Ben Emirhan. Konya Teknik Üniversitesi'nde 4. sınıf öğrencisiyim.",
+      "Şu ana kadar birçok 3D bilgisayarlı görü projesinde çalıştım; edindiğim bilgilerle kariyerimin basamaklarını adım adım çıkıyorum. Bu siteyi, yaptığım bazı projeleri vitrinlemek için kullanacağım.",
       "Zamanımın çoğunu bir şeyler geliştirerek geçiriyorum: bir yanda web uygulamaları, diğer yanda görüntü işleme ve derin öğrenme. Bir fotoğraftan 3D model çıkarmak gibi, ilk duyduğumda biraz imkânsız gelen problemlerle uğraşmayı seviyorum.",
-      "Bu site de üzerinde çalıştığım şeyleri bir arada tuttuğum küçük köşem.",
     ],
-    quote: "Bir model, ancak birisi onu kullanabildiğinde gerçekten çalışıyordur.",
+    quote: "",                       // Alıntı koymak istersen buraya yaz; boşsa görünmez
   },
  
   // ---- Öne çıkan proje ----
@@ -268,7 +268,7 @@ $('#app').innerHTML = `
  
 <section id="hakkimda"><div class="wrap sec-grid fade">
   <h2>${A.title}</h2>
-  <div class="about">${A.paragraphs.map(p=>`<p>${p}</p>`).join('')}<blockquote>“${A.quote}”</blockquote></div>
+  <div class="about">${A.paragraphs.map(p=>`<p>${p}</p>`).join('')}${A.quote ? `<blockquote>“${A.quote}”</blockquote>` : ''}</div>
 </div></section>
  
 <section id="projeler"><div class="wrap sec-grid fade">
