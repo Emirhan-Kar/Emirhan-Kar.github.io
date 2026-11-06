@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
 <script>
 /* =====================================================================
    SİTE AYARLARI — Sitedeki TÜM yazılar, linkler ve resimler burada.
@@ -11,10 +11,10 @@
    Aşağıdaki kodlara (CSS / JS) dokunmana gerek yok.
    ===================================================================== */
 const SITE = {
- 
+
   // ---- Genel ----
   pageTitle: "Emirhan Kar — Portfolyo",
- 
+
   // ---- Renkler (istersen değiştir) ----
   colors: {
     background: "#F3EDE2",           // Krem arka plan
@@ -23,13 +23,13 @@ const SITE = {
     muted:      "#7A6E63",           // Soluk yazılar
     accent:     "#A0522D",           // Vurgu rengi (linkler, küçük detaylar)
   },
- 
+
   // ---- Profil fotoğrafı ----
   // Fotoğrafını index.html ile aynı klasöre koy ve adını yaz, örn: "profil.jpg"
   // Boş bırakırsan ("") fotoğraf yerine baş harfin (photoInitial) yazan bir daire görünür.
   photo: "profil.jpg",
   photoInitial: "E",
- 
+
   // ---- Giriş bölümü ----
   hero: {
     greeting: "Merhaba, ben",
@@ -39,7 +39,7 @@ const SITE = {
     primaryButton:   { text: "Projelerim",   link: "#projeler" },
     secondaryButton: { text: "İletişim",     link: "#iletisim" },
   },
- 
+
   // ---- Hakkımda ----
   about: {
     title: "Hakkımda",
@@ -51,48 +51,60 @@ const SITE = {
     ],
     quote: "",                       // Alıntı koymak istersen buraya yaz; boşsa görünmez
   },
- 
-  // ---- Öne çıkan proje ----
-  featured: {
-    title: "Öne Çıkan Proje",
-    badge: "Aktif geliştirme",
-    name: "ModifAI",
-    tagline: "Araç hasar tarama & 3D modelleme",
-    description: "Kullanıcının çektiği araç fotoğraflarını yapay zekâ modelleriyle işleyip 2D hasar analizi ve 3D model üreten bir servis. Python backend, bekleyen tarama işlerini API üzerinden alıp GPU'da işliyor ve sonucu geri gönderiyor.",
-    link: "",                        // Proje linki varsa yaz, yoksa "" bırak
-    layersTitle: "Nasıl çalışıyor?",
-    layers: [
-      { name: "İş kuyruğu",   detail: "Backend, API'yi düzenli olarak sorgulayıp bekleyen tarama işlerini alır. Başarısız taramalar tekrar kuyruğa girmez, böylece kaynak israfı önlenir." },
-      { name: "Hasar analizi", detail: "Araç fotoğrafları yapay zekâ modelleriyle işlenir ve hasarlı bölgeler 2D olarak tespit edilir." },
-      { name: "Derinlik",      detail: "Depth Anything 3 ile tek fotoğraftan derinlik haritası çıkarılır ve sahne 3B uzaya taşınır." },
-      { name: "Nokta bulutu",  detail: "Derinlikten nokta bulutu üretilir; KDTree tabanlı aykırı nokta temizliği ile gürültü ayıklanır." },
-      { name: "Mesh & teslim", detail: "Poisson rekonstrüksiyonu ile yüzey (mesh) oluşturulur ve 3D model kullanıcıya teslim edilir." },
+
+  // ---- Projeler (kaydırmalı vitrin) ----
+  // Ortadaki kart net, yanlardaki iki kart bulanık görünür; oklarla gezilir.
+  // İstediğin kadar proje ekleyip silebilirsin (en az 3 olursa en güzel görünür).
+  // badge, tagline, link ve steps alanları isteğe bağlı: boş bırakırsan ("" veya []) görünmez.
+  projects: {
+    title: "Öne Çıkan Projeler",
+    items: [
+      {
+        badge: "Aktif geliştirme",
+        name: "ModifAI",
+        tagline: "Araç hasar tarama & 3D modelleme",
+        description: "Kullanıcının çektiği araç fotoğraflarını yapay zekâ modelleriyle işleyip 2D hasar analizi ve 3D model üreten bir servis. Python backend, bekleyen tarama işlerini API üzerinden alıp GPU'da işliyor ve sonucu geri gönderiyor.",
+        tech: ["Python", "PyTorch", "Depth Anything 3"],
+        link: "",
+        stepsTitle: "Nasıl çalışıyor?",
+        steps: [
+          { name: "İş kuyruğu",    detail: "Backend, API'yi düzenli olarak sorgulayıp bekleyen tarama işlerini alır. Başarısız taramalar tekrar kuyruğa girmez, böylece kaynak israfı önlenir." },
+          { name: "Hasar analizi", detail: "Araç fotoğrafları yapay zekâ modelleriyle işlenir ve hasarlı bölgeler 2D olarak tespit edilir." },
+          { name: "Derinlik",      detail: "Depth Anything 3 ile tek fotoğraftan derinlik haritası çıkarılır ve sahne 3B uzaya taşınır." },
+          { name: "Nokta bulutu",  detail: "Derinlikten nokta bulutu üretilir; KDTree tabanlı aykırı nokta temizliği ile gürültü ayıklanır." },
+          { name: "Mesh & teslim", detail: "Poisson rekonstrüksiyonu ile yüzey (mesh) oluşturulur ve 3D model kullanıcıya teslim edilir." },
+        ],
+      },
+      {
+        badge: "",
+        name: "3DGarage",
+        tagline: "Araç modifikasyon önizleme",
+        description: "Kullanıcının aracına renk, jant, spoiler gibi modifikasyonları seçip sonucu 2D veya 3D olarak önizleyebildiği uygulama.",
+        tech: ["Python", "Tripo3D API"],
+        link: "",
+        steps: [],
+      },
+      {
+        badge: "",
+        name: "Proje Adı",           // TODO: kendi projenle değiştir
+        tagline: "Kısa bir alt başlık",
+        description: "Projenin ne yaptığını bir iki cümleyle anlat.",
+        tech: ["Teknoloji 1", "Teknoloji 2"],
+        link: "",
+        steps: [],
+      },
+      {
+        badge: "",
+        name: "Proje Adı",           // TODO: kendi projenle değiştir
+        tagline: "Kısa bir alt başlık",
+        description: "Projenin ne yaptığını bir iki cümleyle anlat.",
+        tech: ["Teknoloji 1", "Teknoloji 2"],
+        link: "",
+        steps: [],
+      },
     ],
   },
- 
-  // ---- Diğer projeler (istediğin kadar ekleyip silebilirsin) ----
-  projectsTitle: "Diğer Projeler",
-  projects: [
-    {
-      name: "3DGarage",
-      description: "Kullanıcının aracına renk, jant, spoiler gibi modifikasyonları seçip sonucu 2D veya 3D olarak önizleyebildiği uygulama.",
-      tech: ["Python", "Tripo3D API"],
-      link: "",
-    },
-    {
-      name: "Proje Adı",             // TODO: kendi projenle değiştir
-      description: "Projenin ne yaptığını bir iki cümleyle anlat.",
-      tech: ["Teknoloji 1", "Teknoloji 2"],
-      link: "",
-    },
-    {
-      name: "Proje Adı",             // TODO: kendi projenle değiştir
-      description: "Projenin ne yaptığını bir iki cümleyle anlat.",
-      tech: ["Teknoloji 1", "Teknoloji 2"],
-      link: "",
-    },
-  ],
- 
+
   // ---- Yetenekler (gruplar halinde) ----
   skillsTitle: "Yetenekler",
   skills: [
@@ -101,7 +113,7 @@ const SITE = {
     { group: "Backend",        items: ["Python", "REST API", "İş kuyrukları"] },
     { group: "Frontend",       items: ["HTML / CSS", "JavaScript", "React"] },   // TODO: kontrol et
   ],
- 
+
   // ---- İletişim ----
   contact: {
     title: "Birlikte bir şey yapalım.",
@@ -118,11 +130,11 @@ const SITE = {
   },
 };
 </script>
- 
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
- 
+
 <style>
 :root{
   --bg:#F3EDE2; --card:#EAE2D4; --text:#2A2420; --muted:#7A6E63; --accent:#A0522D;
@@ -135,14 +147,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17
 a{color:inherit}
 ::selection{background:var(--accent);color:var(--bg)}
 .wrap{max-width:860px;margin:0 auto;padding:0 24px}
- 
+
 /* nav */
 nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px)}
 nav .wrap{display:flex;justify-content:flex-end;align-items:center;height:68px}
 .nav-links{display:flex;gap:26px;font-size:15px}
 .nav-links a{text-decoration:none;color:var(--muted);transition:color .2s}
 .nav-links a:hover{color:var(--text)}
- 
+
 /* hero */
 .hero{padding:110px 0 100px}
 .avatar{width:140px;height:140px;border-radius:50%;margin-bottom:34px;object-fit:cover;display:flex;align-items:center;justify-content:center;
@@ -162,43 +174,55 @@ nav .wrap{display:flex;justify-content:flex-end;align-items:center;height:68px}
 .icon-link{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:color .2s,border-color .2s,transform .2s}
 .icon-link:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
 .icon-link svg,.socials svg{width:18px;height:18px}
- 
+
 /* sections */
 section{padding:70px 0;border-top:1px solid var(--line)}
 .sec-grid{display:grid;grid-template-columns:180px 1fr;gap:40px}
 h2{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.3}
 .about p{margin-bottom:18px}
 blockquote{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.5;color:var(--accent);margin-top:28px;padding-left:20px;border-left:2px solid var(--accent)}
- 
-/* featured */
-.feat{background:var(--card);border-radius:8px;padding:34px}
+
+/* project carousel */
+#projeler{overflow:hidden}
+.carousel-head{text-align:center;margin-bottom:40px}
+.carousel{position:relative;max-width:1180px;margin:0 auto;padding:0 24px}
+.stage{position:relative;height:520px;transition:height .4s ease}
+.pcard{position:absolute;top:0;left:50%;width:min(560px,78%);background:var(--card);border-radius:12px;padding:34px;
+  box-shadow:0 20px 50px -24px rgba(42,36,32,.35);
+  transition:transform .6s cubic-bezier(.22,.8,.2,1),filter .6s ease,opacity .6s ease;transform-origin:center top}
+.pcard.side{cursor:pointer}
+.pcard.side *{pointer-events:none}
+.pcard.hidden{pointer-events:none}
 .badge{display:inline-block;font-size:12px;color:var(--accent);border:1px solid var(--accent);border-radius:30px;padding:2px 12px;margin-bottom:16px}
-.feat h3{font-family:var(--serif);font-weight:500;font-size:32px;line-height:1.2}
-.feat .tagline{color:var(--muted);margin-bottom:16px}
-.layers-title{font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:28px 0 12px}
+.pcard h3{font-family:var(--serif);font-weight:500;font-size:32px;line-height:1.2}
+.pcard .tagline{color:var(--muted);margin-bottom:16px}
+.pcard .tech{margin-top:18px}
+.pcard .tech span{background:var(--bg)}
+.layers-title{font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:26px 0 12px}
 .layers{display:flex;gap:6px;flex-wrap:wrap}
 .layer{font-family:var(--sans);font-size:14px;padding:6px 14px;border-radius:30px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;transition:.2s}
 .layer:hover{border-color:var(--text)}
 .layer.on{background:var(--text);color:var(--bg);border-color:var(--text)}
 .layer-detail{margin-top:16px;color:var(--muted);min-height:56px}
-.feat .more{display:inline-block;margin-top:18px;color:var(--accent);font-weight:500}
- 
-/* project list */
-.proj{display:block;padding:24px 0;border-bottom:1px solid var(--line);text-decoration:none}
-.proj:first-child{padding-top:0}
-.proj-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.proj h4{font-family:var(--serif);font-weight:500;font-size:22px}
-.proj .arrow{color:var(--accent);transition:transform .2s}
-a.proj:hover .arrow{transform:translateX(4px)}
-.proj p{color:var(--muted);margin:6px 0 10px}
+.pcard .more{display:inline-block;margin-top:18px;color:var(--accent);font-weight:500}
+.arrow-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:48px;height:48px;border-radius:50%;
+  border:1px solid var(--line);background:var(--bg);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 18px -8px rgba(42,36,32,.3);transition:background .2s,color .2s,border-color .2s}
+.arrow-btn:hover{background:var(--text);color:var(--bg);border-color:var(--text)}
+.arrow-btn.prev{left:24px}.arrow-btn.next{right:24px}
+.arrow-btn svg{width:20px;height:20px}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:26px}
+.dots button{width:8px;height:8px;border-radius:8px;border:0;background:var(--line);cursor:pointer;transition:width .3s,background .3s;padding:0}
+.dots button.on{width:24px;background:var(--accent)}
+
 .tech{display:flex;gap:8px;flex-wrap:wrap}
 .tech span{font-size:13px;color:var(--muted);background:var(--card);border-radius:4px;padding:2px 10px}
- 
+
 /* skills */
 .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 40px}
 .skills h5{font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .skills li{list-style:none;padding:4px 0}
- 
+
 /* contact */
 .contact h2{font-size:clamp(32px,5vw,48px);line-height:1.15;margin-bottom:14px}
 .contact p{color:var(--muted);margin-bottom:28px}
@@ -207,11 +231,11 @@ a.proj:hover .arrow{transform:translateX(4px)}
 .socials a{text-decoration:none;color:var(--muted);display:inline-flex;align-items:center;gap:8px}
 .socials a:hover{color:var(--text)}
 footer{padding:40px 0 50px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
- 
+
 /* gentle fade-in on scroll */
 .fade{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
 .fade.in{opacity:1;transform:none}
- 
+
 @media (max-width:720px){
   body{font-size:16px}
   .nav-links{gap:16px;font-size:14px}
@@ -222,37 +246,41 @@ footer{padding:40px 0 50px;font-size:14px;color:var(--muted);border-top:1px soli
   .hero-socials{flex-direction:row;align-self:start}
   .hero-socials::before,.hero-socials::after{display:none}
   .sec-grid{grid-template-columns:1fr;gap:20px}
-  .feat{padding:24px}
+  .pcard{width:84%;padding:24px}
+  .pcard h3{font-size:26px}
+  .arrow-btn{width:40px;height:40px;top:auto;bottom:-62px;transform:none}
+  .arrow-btn.prev{left:calc(50% - 110px)}.arrow-btn.next{right:calc(50% - 110px)}
+  .dots{margin-top:40px}
   .skills{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
- 
+
 <nav><div class="wrap">
   <div class="nav-links"><a href="#hakkimda">Hakkımda</a><a href="#projeler">Projeler</a><a href="#yetenekler">Yetenekler</a><a href="#iletisim">İletişim</a></div>
 </div></nav>
- 
+
 <main id="app"></main>
- 
+
 <script>
 const $ = s => document.querySelector(s);
-const H = SITE.hero, A = SITE.about, F = SITE.featured, C = SITE.contact;
- 
+const H = SITE.hero, A = SITE.about, P = SITE.projects, C = SITE.contact;
+
 // colors from config
 const root = document.documentElement.style;
 Object.entries({bg:'background',card:'card',text:'text',muted:'muted',accent:'accent'})
   .forEach(([v,k]) => SITE.colors[k] && root.setProperty('--'+v, SITE.colors[k]));
- 
+
 document.title = SITE.pageTitle;
- 
+
 const ICONS = {
   instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>',
   linkedin:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>',
   github:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>',
 };
 const ext = l => l ? `href="${l}" target="_blank" rel="noopener"` : '';
- 
+
 $('#app').innerHTML = `
 <header class="hero"><div class="wrap"><div>
   ${SITE.photo ? `<img class="avatar fade" src="${SITE.photo}" alt="Profil fotoğrafı">` : `<div class="avatar fade">${SITE.photoInitial}</div>`}
@@ -266,58 +294,97 @@ $('#app').innerHTML = `
   </div>
   <div class="hero-socials fade">${C.links.map(l=>`<a class="icon-link" ${ext(l.url)} aria-label="${l.text}" title="${l.text}">${ICONS[l.icon]||''}</a>`).join('')}</div>
 </div></header>
- 
+
 <section id="hakkimda"><div class="wrap sec-grid fade">
   <h2>${A.title}</h2>
   <div class="about">${A.paragraphs.map(p=>`<p>${p}</p>`).join('')}${A.quote ? `<blockquote>“${A.quote}”</blockquote>` : ''}</div>
 </div></section>
- 
-<section id="projeler"><div class="wrap sec-grid fade">
-  <h2>${F.title}</h2>
-  <div class="feat">
-    <span class="badge">${F.badge}</span>
-    <h3>${F.name}</h3>
-    <div class="tagline">${F.tagline}</div>
-    <p>${F.description}</p>
-    <div class="layers-title">${F.layersTitle}</div>
-    <div class="layers">${F.layers.map((l,i)=>`<button class="layer${i?'':' on'}" data-i="${i}">${i+1}. ${l.name}</button>`).join('')}</div>
-    <p class="layer-detail" id="layerDetail">${F.layers[0]?.detail||''}</p>
-    ${F.link ? `<a class="more" ${ext(F.link)}>Projeyi incele →</a>` : ''}
+
+<section id="projeler"><div class="fade">
+  <div class="wrap carousel-head"><h2>${P.title}</h2></div>
+  <div class="carousel">
+    <button class="arrow-btn prev" aria-label="Önceki proje"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="stage">
+      ${P.items.map((p,k)=>`<article class="pcard" data-k="${k}">
+        ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+        <h3>${p.name}</h3>
+        ${p.tagline ? `<div class="tagline">${p.tagline}</div>` : ''}
+        <p>${p.description}</p>
+        ${(p.tech||[]).length ? `<div class="tech">${p.tech.map(t=>`<span>${t}</span>`).join('')}</div>` : ''}
+        ${(p.steps||[]).length ? `<div class="layers-title">${p.stepsTitle||'Nasıl çalışıyor?'}</div>
+          <div class="layers">${p.steps.map((l,i)=>`<button class="layer${i?'':' on'}" data-i="${i}">${i+1}. ${l.name}</button>`).join('')}</div>
+          <p class="layer-detail">${p.steps[0].detail}</p>` : ''}
+        ${p.link ? `<a class="more" ${ext(p.link)}>Projeyi incele →</a>` : ''}
+      </article>`).join('')}
+    </div>
+    <button class="arrow-btn next" aria-label="Sonraki proje"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
   </div>
+  <div class="dots">${P.items.map((_,k)=>`<button aria-label="Proje ${k+1}" data-k="${k}"></button>`).join('')}</div>
 </div></section>
- 
-<section><div class="wrap sec-grid fade">
-  <h2>${SITE.projectsTitle}</h2>
-  <div>
-    ${SITE.projects.map(p=>`<${p.link?'a':'div'} class="proj" ${ext(p.link)}>
-      <div class="proj-head"><h4>${p.name}</h4>${p.link?'<span class="arrow">→</span>':''}</div>
-      <p>${p.description}</p>
-      <div class="tech">${p.tech.map(t=>`<span>${t}</span>`).join('')}</div>
-    </${p.link?'a':'div'}>`).join('')}
-  </div>
-</div></section>
- 
+
 <section id="yetenekler"><div class="wrap sec-grid fade">
   <h2>${SITE.skillsTitle}</h2>
   <div class="skills">${SITE.skills.map(g=>`<div><h5>${g.group}</h5><ul>${g.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('')}</div>
 </div></section>
- 
+
 <section id="iletisim" class="contact"><div class="wrap fade">
   <h2>${C.title}</h2>
   <p>${C.description}</p>
   <a class="email" href="mailto:${C.email}">${C.email}</a>
   <div class="socials">${C.links.map(l=>`<a ${ext(l.url)}>${ICONS[l.icon]||''}${l.text}</a>`).join('')}</div>
 </div></section>
- 
+
 <footer><div class="wrap">${C.footer}</div></footer>`;
- 
-// project layers
-document.querySelectorAll('.layer').forEach(b => b.onclick = () => {
-  document.querySelectorAll('.layer').forEach(x => x.classList.remove('on'));
-  b.classList.add('on');
-  $('#layerDetail').textContent = F.layers[b.dataset.i].detail;
+
+// project step buttons (inside each card)
+document.querySelectorAll('.pcard').forEach(card => {
+  const p = P.items[card.dataset.k];
+  card.querySelectorAll('.layer').forEach(b => b.onclick = () => {
+    card.querySelectorAll('.layer').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    card.querySelector('.layer-detail').textContent = p.steps[b.dataset.i].detail;
+    fitStage();
+  });
 });
- 
+
+// carousel: center card sharp, neighbours blurred behind
+const cards = [...document.querySelectorAll('.pcard')], dots = [...document.querySelectorAll('.dots button')];
+const stage = $('.stage'), n = cards.length;
+let cur = 0;
+function rel(k){ let d = k - cur; if (n > 2) { if (d > n/2) d -= n; if (d < -n/2) d += n; } return d; }
+function layout(){
+  const mobile = innerWidth < 720, shift = mobile ? 58 : 72;
+  cards.forEach((c,k) => {
+    const d = rel(k), ad = Math.abs(d);
+    c.classList.toggle('side', ad === 1);
+    c.classList.toggle('hidden', ad > 1);
+    c.style.zIndex = 10 - ad;
+    c.style.transform = `translateX(calc(-50% + ${Math.max(-2, Math.min(2, d))*shift}%)) scale(${ad ? .84 : 1})`;
+    c.style.filter = ad ? 'blur(3px)' : 'none';
+    c.style.opacity = ad === 0 ? 1 : ad === 1 ? .55 : 0;
+    c.setAttribute('aria-hidden', ad ? 'true' : 'false');
+  });
+  dots.forEach((b,k) => b.classList.toggle('on', k === cur));
+  fitStage();
+}
+function fitStage(){ stage.style.height = Math.max(...cards.map(c => c.offsetHeight)) + 'px'; }
+function go(k){ cur = (k + n) % n; layout(); }
+$('.arrow-btn.prev').onclick = () => go(cur - 1);
+$('.arrow-btn.next').onclick = () => go(cur + 1);
+dots.forEach(b => b.onclick = () => go(+b.dataset.k));
+cards.forEach((c,k) => c.addEventListener('click', () => { if (c.classList.contains('side')) go(k); }));
+document.addEventListener('keydown', e => {
+  const r = stage.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+  if (e.key === 'ArrowLeft') go(cur - 1);
+  if (e.key === 'ArrowRight') go(cur + 1);
+});
+let tx = null;
+stage.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+stage.addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1)); tx = null; });
+addEventListener('resize', layout);
+document.fonts && document.fonts.ready.then(fitStage);
+layout();
+
 // fade-in on scroll
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
@@ -329,4 +396,4 @@ document.querySelectorAll('.fade').forEach((el, i) => {
 </script>
 </body>
 </html>
- 
+
