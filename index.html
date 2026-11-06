@@ -129,7 +129,7 @@ const SITE = {
   contact: {
     title: "Birlikte bir şey yapalım.",
     description: "Staj, freelance proje ya da sadece tanışmak için yazabilirsin.",
-    email: "ornek@mail.com",          // TODO: kendi e-posta adresin
+    email: "emirhankar5434@gmail.com",   // Tıklanınca Gmail'de bu adrese yeni mesaj penceresi açılır
     // Sosyal medya linkleri: hem giriş bölümünün sağındaki ikonlarda hem de buradaki iletişim bölümünde görünür.
     // icon: "instagram", "linkedin" veya "github" olabilir.
     links: [
@@ -343,7 +343,7 @@ $('#app').innerHTML = `
 <section id="iletisim" class="contact"><div class="wrap fade">
   <h2>${C.title}</h2>
   <p>${C.description}</p>
-  <a class="email" href="mailto:${C.email}">${C.email}</a>
+  <a class="email" href="https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(C.email)}" target="_blank" rel="noopener">${C.email}</a>
   <div class="socials">${C.links.map(l=>`<a ${ext(l.url)}>${ICONS[l.icon]||''}${l.text}</a>`).join('')}</div>
 </div></section>
 
