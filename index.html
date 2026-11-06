@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+/* =====================================================================
+   SİTE AYARLARI — Sitedeki TÜM yazılar, linkler ve resimler burada.
+   Bir şeyi değiştirmek için sadece bu bloğu düzenlemen yeterli.
+   Aşağıdaki kodlara (CSS / JS) dokunmana gerek yok.
+   ===================================================================== */
+const SITE = {
+
+  // ---- Genel ----
+  pageTitle: "Emirhan — Portfolyo",
+  navName: "Emirhan",                // Sol üstteki isim
+  status: "Projelere açık",          // Giriş bölümündeki küçük yeşil noktalı yazı
+
+  // ---- Renkler (istersen değiştir) ----
+  colors: {
+    background: "#F3EDE2",           // Krem arka plan
+    card:       "#EAE2D4",           // Kartların rengi
+    text:       "#2A2420",           // Ana yazı rengi
+    muted:      "#7A6E63",           // Soluk yazılar
+    accent:     "#A0522D",           // Vurgu rengi (linkler, küçük detaylar)
+  },
+
+  // ---- Fotoğraf ----
+  // Fotoğraf koymak istersen dosyanın yolunu yaz: "foto.jpg" (index.html ile aynı klasöre koy)
+  // Boş bırakırsan ("") fotoğraf alanı hiç görünmez.
+  photo: "",
+
+  // ---- Giriş bölümü ----
+  hero: {
+    greeting: "Merhaba, ben",
+    name: "Emirhan.",
+    role: "Full Stack Developer · Görüntü İşleme · Derin Öğrenme",
+    description: "Konya Teknik Üniversitesi 4. sınıf öğrencisiyim. Web uygulamalarını uçtan uca geliştiriyor, görüntü işleme ve derin öğrenme modellerini gerçek ürünlere dönüştürüyorum.",
+    primaryButton:   { text: "Projelerim",   link: "#projeler" },
+    secondaryButton: { text: "İletişim",     link: "#iletisim" },
+  },
+
+  // ---- Hakkımda ----
+  about: {
+    title: "Hakkımda",
+    paragraphs: [
+      "Ben Emirhan. Konya Teknik Üniversitesi'nde 4. sınıf öğrencisiyim.",
+      "Bir yandan full stack geliştirici olarak web uygulamaları yapıyorum, bir yandan da görüntü işleme ve derin öğrenme üzerine çalışıyorum. En çok sevdiğim şey, bir yapay zekâ modelini laboratuvar ortamından çıkarıp insanların gerçekten kullanabileceği bir ürüne dönüştürmek.",
+    ],
+    quote: "Bir model, ancak birisi onu kullanabildiğinde gerçekten çalışıyordur.",
+  },
+
+  // ---- Öne çıkan proje ----
+  featured: {
+    title: "Öne Çıkan Proje",
+    badge: "Aktif geliştirme",
+    name: "ModifAI",
+    tagline: "Araç hasar tarama & 3D modelleme",
+    description: "Kullanıcının çektiği araç fotoğraflarını yapay zekâ modelleriyle işleyip 2D hasar analizi ve 3D model üreten bir servis. Python backend, bekleyen tarama işlerini API üzerinden alıp GPU'da işliyor ve sonucu geri gönderiyor.",
+    link: "",                        // Proje linki varsa yaz, yoksa "" bırak
+    layersTitle: "Nasıl çalışıyor?",
+    layers: [
+      { name: "İş kuyruğu",   detail: "Backend, API'yi düzenli olarak sorgulayıp bekleyen tarama işlerini alır. Başarısız taramalar tekrar kuyruğa girmez, böylece kaynak israfı önlenir." },
+      { name: "Hasar analizi", detail: "Araç fotoğrafları yapay zekâ modelleriyle işlenir ve hasarlı bölgeler 2D olarak tespit edilir." },
+      { name: "Derinlik",      detail: "Depth Anything 3 ile tek fotoğraftan derinlik haritası çıkarılır ve sahne 3B uzaya taşınır." },
+      { name: "Nokta bulutu",  detail: "Derinlikten nokta bulutu üretilir; KDTree tabanlı aykırı nokta temizliği ile gürültü ayıklanır." },
+      { name: "Mesh & teslim", detail: "Poisson rekonstrüksiyonu ile yüzey (mesh) oluşturulur ve 3D model kullanıcıya teslim edilir." },
+    ],
+  },
+
+  // ---- Diğer projeler (istediğin kadar ekleyip silebilirsin) ----
+  projectsTitle: "Diğer Projeler",
+  projects: [
+    {
+      name: "3DGarage",
+      description: "Kullanıcının aracına renk, jant, spoiler gibi modifikasyonları seçip sonucu 2D veya 3D olarak önizleyebildiği uygulama.",
+      tech: ["Python", "Tripo3D API"],
+      link: "",
+    },
+    {
+      name: "Proje Adı",             // TODO: kendi projenle değiştir
+      description: "Projenin ne yaptığını bir iki cümleyle anlat.",
+      tech: ["Teknoloji 1", "Teknoloji 2"],
+      link: "",
+    },
+    {
+      name: "Proje Adı",             // TODO: kendi projenle değiştir
+      description: "Projenin ne yaptığını bir iki cümleyle anlat.",
+      tech: ["Teknoloji 1", "Teknoloji 2"],
+      link: "",
+    },
+  ],
+
+  // ---- Yetenekler (gruplar halinde) ----
+  skillsTitle: "Yetenekler",
+  skills: [
+    { group: "Derin Öğrenme",  items: ["PyTorch", "CUDA", "Derinlik tahmini"] },
+    { group: "Görüntü İşleme", items: ["OpenCV", "3D rekonstrüksiyon", "Nokta bulutu işleme"] },
+    { group: "Backend",        items: ["Python", "REST API", "İş kuyrukları"] },
+    { group: "Frontend",       items: ["HTML / CSS", "JavaScript", "React"] },   // TODO: kontrol et
+  ],
+
+  // ---- İletişim ----
+  contact: {
+    title: "Birlikte bir şey yapalım.",
+    description: "Staj, freelance proje ya da sadece tanışmak için yazabilirsin.",
+    email: "ornek@mail.com",          // TODO: kendi e-posta adresin
+    links: [
+      { text: "GitHub",   url: "https://github.com/kullaniciadi" },        // TODO
+      { text: "LinkedIn", url: "https://linkedin.com/in/kullaniciadi" },   // TODO
+    ],
+    footer: "© 2026 Emirhan",
+  },
+};
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F3EDE2; --card:#EAE2D4; --text:#2A2420; --muted:#7A6E63; --accent:#A0522D;
+  --line:rgba(42,36,32,.14);
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+::selection{background:var(--accent);color:var(--bg)}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.nav-name{font-family:var(--serif);font-size:20px;text-decoration:none}
+.nav-links{display:flex;gap:26px;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+
+/* hero */
+.hero{padding:110px 0 100px}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:30px;padding:5px 14px;margin-bottom:34px}
+.status i{width:7px;height:7px;border-radius:50%;background:#5a9a5a}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,8vw,80px);line-height:1.05;letter-spacing:-1.5px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.role{margin-top:22px;font-size:15px;color:var(--muted)}
+.hero p.desc{margin-top:22px;max-width:600px;font-size:19px}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:50px;align-items:center}
+.photo{width:220px;aspect-ratio:4/5;object-fit:cover;border-radius:4px}
+.btns{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
+.btn{display:inline-block;font-size:15px;font-weight:500;text-decoration:none;padding:11px 22px;border-radius:40px;border:1px solid var(--text);transition:.2s}
+.btn.dark{background:var(--text);color:var(--bg)}
+.btn.dark:hover{background:var(--accent);border-color:var(--accent)}
+.btn:not(.dark):hover{background:var(--card)}
+
+/* sections */
+section{padding:70px 0;border-top:1px solid var(--line)}
+.sec-grid{display:grid;grid-template-columns:180px 1fr;gap:40px}
+h2{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.3}
+.about p{margin-bottom:18px}
+blockquote{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.5;color:var(--accent);margin-top:28px;padding-left:20px;border-left:2px solid var(--accent)}
+
+/* featured */
+.feat{background:var(--card);border-radius:8px;padding:34px}
+.badge{display:inline-block;font-size:12px;color:var(--accent);border:1px solid var(--accent);border-radius:30px;padding:2px 12px;margin-bottom:16px}
+.feat h3{font-family:var(--serif);font-weight:500;font-size:32px;line-height:1.2}
+.feat .tagline{color:var(--muted);margin-bottom:16px}
+.layers-title{font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:28px 0 12px}
+.layers{display:flex;gap:6px;flex-wrap:wrap}
+.layer{font-family:var(--sans);font-size:14px;padding:6px 14px;border-radius:30px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;transition:.2s}
+.layer:hover{border-color:var(--text)}
+.layer.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.layer-detail{margin-top:16px;color:var(--muted);min-height:56px}
+.feat .more{display:inline-block;margin-top:18px;color:var(--accent);font-weight:500}
+
+/* project list */
+.proj{display:block;padding:24px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.proj:first-child{padding-top:0}
+.proj-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.proj h4{font-family:var(--serif);font-weight:500;font-size:22px}
+.proj .arrow{color:var(--accent);transition:transform .2s}
+a.proj:hover .arrow{transform:translateX(4px)}
+.proj p{color:var(--muted);margin:6px 0 10px}
+.tech{display:flex;gap:8px;flex-wrap:wrap}
+.tech span{font-size:13px;color:var(--muted);background:var(--card);border-radius:4px;padding:2px 10px}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 40px}
+.skills h5{font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.skills li{list-style:none;padding:4px 0}
+
+/* contact */
+.contact h2{font-size:clamp(32px,5vw,48px);line-height:1.15;margin-bottom:14px}
+.contact p{color:var(--muted);margin-bottom:28px}
+.email{font-family:var(--serif);font-size:clamp(22px,4vw,30px);color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
+.socials{display:flex;gap:24px;margin-top:30px}
+.socials a{text-decoration:none;color:var(--muted)}
+.socials a:hover{color:var(--text)}
+footer{padding:40px 0 50px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+
+/* gentle fade-in on scroll */
+.fade{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+.fade.in{opacity:1;transform:none}
+
+@media (max-width:720px){
+  body{font-size:16px}
+  .nav-links{gap:16px;font-size:14px}
+  .nav-links a:nth-child(3){display:none}
+  .hero{padding:70px 0}
+  .hero-grid{grid-template-columns:1fr}
+  .photo{width:160px}
+  .sec-grid{grid-template-columns:1fr;gap:20px}
+  .feat{padding:24px}
+  .skills{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a href="#" class="nav-name" id="navName"></a>
+  <div class="nav-links"><a href="#hakkimda">Hakkımda</a><a href="#projeler">Projeler</a><a href="#yetenekler">Yetenekler</a><a href="#iletisim">İletişim</a></div>
+</div></nav>
+
+<main id="app"></main>
+
+<script>
+const $ = s => document.querySelector(s);
+const H = SITE.hero, A = SITE.about, F = SITE.featured, C = SITE.contact;
+
+// colors from config
+const root = document.documentElement.style;
+Object.entries({bg:'background',card:'card',text:'text',muted:'muted',accent:'accent'})
+  .forEach(([v,k]) => SITE.colors[k] && root.setProperty('--'+v, SITE.colors[k]));
+
+document.title = SITE.pageTitle;
+$('#navName').textContent = SITE.navName;
+
+const ext = l => l ? `href="${l}" target="_blank" rel="noopener"` : '';
+
+$('#app').innerHTML = `
+<header class="hero"><div class="wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="status fade"><i></i>${SITE.status}</div>
+      <h1 class="fade">${H.greeting} <em>${H.name}</em></h1>
+      <div class="role fade">${H.role}</div>
+      <p class="desc fade">${H.description}</p>
+      <div class="btns fade">
+        <a class="btn dark" href="${H.primaryButton.link}">${H.primaryButton.text}</a>
+        <a class="btn" href="${H.secondaryButton.link}">${H.secondaryButton.text}</a>
+      </div>
+    </div>
+    ${SITE.photo ? `<img class="photo fade" src="${SITE.photo}" alt="${SITE.navName}">` : ''}
+  </div>
+</div></header>
+
+<section id="hakkimda"><div class="wrap sec-grid fade">
+  <h2>${A.title}</h2>
+  <div class="about">${A.paragraphs.map(p=>`<p>${p}</p>`).join('')}<blockquote>“${A.quote}”</blockquote></div>
+</div></section>
+
+<section id="projeler"><div class="wrap sec-grid fade">
+  <h2>${F.title}</h2>
+  <div class="feat">
+    <span class="badge">${F.badge}</span>
+    <h3>${F.name}</h3>
+    <div class="tagline">${F.tagline}</div>
+    <p>${F.description}</p>
+    <div class="layers-title">${F.layersTitle}</div>
+    <div class="layers">${F.layers.map((l,i)=>`<button class="layer${i?'':' on'}" data-i="${i}">${i+1}. ${l.name}</button>`).join('')}</div>
+    <p class="layer-detail" id="layerDetail">${F.layers[0]?.detail||''}</p>
+    ${F.link ? `<a class="more" ${ext(F.link)}>Projeyi incele →</a>` : ''}
+  </div>
+</div></section>
+
+<section><div class="wrap sec-grid fade">
+  <h2>${SITE.projectsTitle}</h2>
+  <div>
+    ${SITE.projects.map(p=>`<${p.link?'a':'div'} class="proj" ${ext(p.link)}>
+      <div class="proj-head"><h4>${p.name}</h4>${p.link?'<span class="arrow">→</span>':''}</div>
+      <p>${p.description}</p>
+      <div class="tech">${p.tech.map(t=>`<span>${t}</span>`).join('')}</div>
+    </${p.link?'a':'div'}>`).join('')}
+  </div>
+</div></section>
+
+<section id="yetenekler"><div class="wrap sec-grid fade">
+  <h2>${SITE.skillsTitle}</h2>
+  <div class="skills">${SITE.skills.map(g=>`<div><h5>${g.group}</h5><ul>${g.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('')}</div>
+</div></section>
+
+<section id="iletisim" class="contact"><div class="wrap fade">
+  <h2>${C.title}</h2>
+  <p>${C.description}</p>
+  <a class="email" href="mailto:${C.email}">${C.email}</a>
+  <div class="socials">${C.links.map(l=>`<a ${ext(l.url)}>${l.text} ↗</a>`).join('')}</div>
+</div></section>
+
+<footer><div class="wrap">${C.footer}</div></footer>`;
+
+// project layers
+document.querySelectorAll('.layer').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.layer').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  $('#layerDetail').textContent = F.layers[b.dataset.i].detail;
+});
+
+// fade-in on scroll
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.fade').forEach((el, i) => {
+  el.style.transitionDelay = el.closest('.hero') ? (i * 90) + 'ms' : '0ms';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
