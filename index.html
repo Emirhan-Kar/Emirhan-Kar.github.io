@@ -90,7 +90,7 @@ const SITE = {
         badge: "",
         name: "Dental Scanner",
         tagline: "Ağız içi 3D tarama ve yapay zekâ ile diş segmentasyonu",
-        description: "Lazer çizgili kamera görüntülerinden dişlerin 3D modelini çıkaran, her dişi FDI numarasıyla etiketleyen ve ortodontik ölçümleri otomatik hesaplayan bir yazılım motoru. Furkan Genç ile birlikte geliştirdiğimiz bitirme projesi; donanım olmadan, ışın izlemeli sanal tarayıcı ve Teeth3DS veri setiyle uçtan uca doğrulandı. Akademik bir araştırma prototipidir, klinik kullanım için değildir.",
+        description: "Lazer çizgili kamera görüntülerinden dişlerin 3D modelini çıkaran, her dişi FDI numarasıyla etiketleyen ve ortodontik ölçümleri otomatik hesaplayan bir yazılım motoru. <a href='https://github.com/FurkanGencc' target='_blank' rel='noopener'>Furkan Genç</a> ile birlikte geliştirdiğimiz bitirme projesi; donanım olmadan, ışın izlemeli sanal tarayıcı ve Teeth3DS veri setiyle uçtan uca doğrulandı. Akademik bir araştırma prototipidir, klinik kullanım için değildir.",
         tech: ["Python", "PyTorch", "DGCNN", "Open3D", "OpenCV", "Dash", "Plotly", "Docker"],
         link: "https://github.com/Emirhan-Kar/Dental3DScanner",
         stepsTitle: "Nasıl çalışıyor?",
@@ -216,6 +216,8 @@ blockquote{font-family:var(--serif);font-style:italic;font-size:22px;line-height
 .layer.on{background:var(--text);color:var(--bg);border-color:var(--text)}
 .layer-detail{margin-top:16px;color:var(--muted);min-height:56px}
 .pcard .more{display:inline-block;margin-top:18px;color:var(--accent);font-weight:500}
+.pcard p a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.pcard p a:hover{text-decoration-thickness:2px}
 .arrow-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:48px;height:48px;border-radius:50%;
   border:1px solid var(--line);background:var(--bg);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 18px -8px rgba(42,36,32,.3);transition:background .2s,color .2s,border-color .2s}
