@@ -60,10 +60,10 @@ const SITE = {
     title: "Öne Çıkan Projeler",
     items: [
       {
-        badge: "Aktif geliştirme",
+        badge: "",
         name: "ModifAI",
         tagline: "Araç videosundan dokulu 3D model",
-        description: "Kullanıcının aracın etrafında çektiği normal ya da 360° videodan, zemine oturtulmuş ve dokusu fırınlanmış bir 3D araç modeli (.glb) üreten servis. Her biri kendi klasöründe izole çalışan, ayrı ayrı yeniden çalıştırılabilen 10 adımlık bir boru hattı; FastAPI sunucusu ve tek GPU iş kuyruğu üzerinde çalışıyor.",
+        description: "Kullanıcının aracın etrafında çektiği normal ya da 360° videodan, zemine oturtulmuş ve dokusu fırınlanmış bir 3D araç modeli üreten servis. Her biri kendi klasöründe izole çalışan, ayrı ayrı yeniden çalıştırılabilen 10 adımlık bir boru hattı; FastAPI sunucusu ve tek GPU iş kuyruğu üzerinde çalışıyor.",
         tech: ["Python", "FastAPI", "PyTorch", "SAM 2", "YOLOv8", "COLMAP", "Nerfstudio", "Gaussian Splatting", "Open3D", "xatlas", "FFmpeg"],
         link: "",
         stepsTitle: "Nasıl çalışıyor?",
@@ -87,7 +87,7 @@ const SITE = {
         steps: [],
       },
       {
-        badge: "Bitirme projesi",
+        badge: "",
         name: "Dental Scanner",
         tagline: "Ağız içi 3D tarama ve yapay zekâ ile diş segmentasyonu",
         description: "Lazer çizgili kamera görüntülerinden dişlerin 3D modelini çıkaran, her dişi FDI numarasıyla etiketleyen ve ortodontik ölçümleri otomatik hesaplayan bir yazılım motoru. Furkan Genç ile birlikte geliştirdiğimiz bitirme projesi; donanım olmadan, ışın izlemeli sanal tarayıcı ve Teeth3DS veri setiyle uçtan uca doğrulandı. Akademik bir araştırma prototipidir, klinik kullanım için değildir.",
@@ -96,7 +96,7 @@ const SITE = {
         stepsTitle: "Nasıl çalışıyor?",
         steps: [
           { name: "Lazer tespiti",     detail: "Kamera karesinde HSV maskesiyle kırmızı lazer çizgisi bulunur, her piksel sütununda ağırlık merkeziyle alt-piksel hassasiyetinde tepe noktası çıkarılır. Aynı sütunda iki lazer parçası olduğunda en güçlü bağlantılı parça seçilerek sahte noktalar engellenir." },
-          { name: "Üçgenleme",         detail: "Kalibre edilmiş kamera matrisi ile lazer düzlemi kesiştirilerek her tepe noktasının metrik 3D koordinatı (X, Y, Z) hesaplanır." },
+          { name: "Üçgenleme",         detail: "Kalibre edilmiş kamera matrisi ile lazer düzlemi kesiştirilerek her tepe noktasının metrik 3D koordinatı hesaplanır." },
           { name: "Hizalama",          detail: "Kareler yamalara toplanıp modele hibrit yöntemle hizalanır: önce nokta-düzlem ICP, kalite testini geçemezse FPFH + RANSAC ile yeniden konumlama. IMU'dan gelen hareket ve bir makullük kapısı yanlış dişe oturmayı engeller." },
           { name: "Yüzey",             detail: "Nokta bulutu aykırı nokta filtrelerinden geçirilir, Poisson yüzey rekonstrüksiyonu ile .ply / .stl modeli üretilir; taranmayan bölgelerde uydurulan yüzeyler kırpılır." },
           { name: "Segmentasyon",      detail: "Teeth3DS'teki 900 hasta / 2.100 çene taramasıyla A100 üzerinde eğitilen DGCNN, 32 dişi ve diş etini ayırır. Test setinde mIoU 0,817 ve dişlerin %96,5'ini doğru tanıma; PointNet'e göre +8,5 puan." },
